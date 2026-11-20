@@ -51,3 +51,12 @@ collections:
       - { label: "SEO Description", name: "description", widget: "text" }
       - { label: "Обложка", name: "cover", widget: "image", required: false }
       - { label: "Текст", name: "body", widget: "markdown" }
+
+  - name: "videos"
+    label: "Видео"
+    folder: "src/content/videos"
+    create: true
+    fields:
+      - { label: "Название", name: "title", widget: "string" }
+      - { label: "Ссылка на YouTube", name: "url", widget: "string", hint: "Например: https://www.youtube.com/watch?v=XXXXXXX" }
+      - { label: "Обложка (превью)", name: "thumbnail", widget: "image", required: false }
