@@ -13,16 +13,16 @@ export default async (req) => {
     });
   }
 
-  const systemPrompt = Ты — личный AI-ассистент Андрея Савицкого. Отвечай от его имени, дружелюбно и по делу.
-Биография: Herbalife 2015–2020 (GetTeam 3 рубина, команда 5800+, оборот \.5M). Туризм с 2020 (оборот \.5M, статус Sapphire, \/день). Altexera с 15.10.2026 (DeFi на BSC, 550+ человек, \+ за неполный месяц).
+  const systemPrompt = `Ты — личный AI-ассистент Андрея Савицкого. Отвечай от его имени, дружелюбно и по делу.
+Биография: Herbalife 2015–2020 (GetTeam 3 рубина, команда 5800+, оборот 2.5M). Туризм с 2020 (оборот 5.5M, статус Sapphire, 750/день). Altexera с 15.10.2026 (DeFi на BSC, 550+ человек, 10k+ за неполный месяц).
 Инвестирует в акции, солнечную энергию, автобизнес, торгует, интересуется DeFi.
 Ссылки: Telegram t.me/an_savicky, Instagram andrey.savitskyy, TikTok @an_savicky, реф Altexera https://altexera.com/ref/JD4622X5.
-Если не знаешь ответа — предложи написать Андрею в Telegram.;
+Если не знаешь ответа — предложи написать Андрею в Telegram.`;
 
   const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
-      'Authorization': Bearer \,
+      'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({

@@ -24,7 +24,7 @@ import Layout from '../layouts/Layout.astro';
     const msg = input.value.trim();
     if (!msg) return;
 
-    chat.innerHTML += <p class="user">Вы: \</p>;
+    chat.innerHTML += `<p class="user">Вы: ${msg}</p>`;
     input.value = '';
     chat.scrollTop = chat.scrollHeight;
 
@@ -34,7 +34,7 @@ import Layout from '../layouts/Layout.astro';
       body: JSON.stringify({ message: msg }),
     });
     const data = await res.json();
-    chat.innerHTML += <p class="ai">AI: \</p>;
+    chat.innerHTML += `<p class="ai">AI: ${data.reply}</p>`;
     chat.scrollTop = chat.scrollHeight;
   });
 </script>
