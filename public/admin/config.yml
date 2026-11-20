@@ -1,0 +1,32 @@
+﻿backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "Страницы"
+    files:
+      - name: "home"
+        label: "Главная"
+        file: "src/content/pages/home.md"
+        fields:
+          - { label: "SEO Title", name: "seo_title", widget: "string" }
+          - { label: "SEO Description", name: "seo_description", widget: "text" }
+          - { label: "Hero фото", name: "hero_image", widget: "image", required: false }
+          - { label: "Обо мне (кратко)", name: "intro", widget: "text" }
+          - { label: "YouTube Embed URL", name: "youtube_url", widget: "string", default: "https://www.youtube.com/embed/Azc63zJjTUk" }
+
+  - name: "projects"
+    label: "Проекты"
+    folder: "src/content/projects"
+    create: true
+    fields:
+      - { label: "Название", name: "title", widget: "string" }
+      - { label: "Описание", name: "description", widget: "text" }
+      - { label: "Фото", name: "image", widget: "image", required: false }
+      - { label: "Alt-текст", name: "image_alt", widget: "string" }
+      - { label: "Период", name: "period", widget: "string" }
+      - { label: "Результат", name: "result", widget: "string" }
