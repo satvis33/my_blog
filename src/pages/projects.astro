@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+---
+
+<Layout title="Проекты Андрея Савицкого" description="Herbalife, Туризм, Altexera, Инвестиции. Опыт и результаты.">
+  <main class="projects-page">
+    <h1>Мои проекты</h1>
+    <p class="subtitle">Опыт, который приносит результат</p>
+    
+    <div class="grid">
+      {projects.map((project) => (
+        <div class="card">
+          {project.data.image && <img src={project.data.image} alt={project.data.image_alt} />}
+          <div class="content">
+            <span class="period">{project.data.period}</span>
+            <h2>{project.data.title}</h2>
+            <p>{project.data.description}</p>
+            <div class="result">{project.data.result}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .projects-page { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
+  h1 { color: #f9fafb; text-align: center; font-size: 3rem; margin-bottom: 1rem; }
+  .subtitle { text-align: center; color: #aaa; margin-bottom: 4rem; font-size: 1.2rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .card { background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden; transition: transform 0.2s; }
+  .card:hover { transform: translateY(-5px); border-color: #d2e0ff; }
+  .card img { width: 100%; height: 200px; object-fit: cover; }
+  .content { padding: 1.5rem; }
+  .period { color: #d2e0ff; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+  h2 { color: #fff; margin: 0.5rem 0 1rem; font-size: 1.5rem; }
+  p { color: #aaa; line-height: 1.6; margin-bottom: 1.5rem; }
+  .result { background: #1a1a1a; padding: 1rem; border-radius: 8px; color: #fff; font-weight: bold; border-left: 3px solid #d2e0ff; }
+</style>
