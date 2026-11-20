@@ -23,7 +23,7 @@ export default async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama3-8b-8192',
+        model: 'qwen/qwen3.8-27b',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: message },
