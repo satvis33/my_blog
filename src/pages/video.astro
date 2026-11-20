@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const videos = await getCollection('videos');
+---
+
+<Layout title="Видео Андрея Савицкого" description="Блог, инвестиции, крипта и бизнес.">
+  <main class="video-page">
+    <h1>Блог и Видео</h1>
+    <p class="subtitle">Разбираю бизнес, инвестиции и тренды</p>
+    
+    <div class="carousel">
+      {videos.length > 0 ? (
+        videos.map((video) => {
+          const videoId = video.data.url.includes('v=') 
+            ? video.data.url.split('v=')[1].split('&')[0] 
+            : video.data.url.split('/').pop();
+          const thumbUrl = video.data.thumbnail || `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+          
+          return (
+            <div class="video-card">
+              <a href={video.data.url} target="_blank" rel="noopener">
+                <img src={thumbUrl} alt={video.data.title} />
+                <h3>{video.data.title}</h3>
+              </a>
+            </div>
+          );
+        })
+      ) : (
+        <p class="loading">Пока нет добавленных видео. Зайдите в админку, чтобы добавить.</p>
+      )}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .video-page { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+  h1 { color: #f9fafb; text-align: center; font-size: 3rem; margin-bottom: 1rem; }
+  .subtitle { text-align: center; color: #aaa; margin-bottom: 4rem; font-size: 1.2rem; }
+  
+  .carousel {
+    display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 2rem;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar { display: none; }
+  
+  .video-card {
+    min-width: 280px; scroll-snap-align: start;
+    background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .video-card:hover { transform: translateY(-5px); border-color: #d2e0ff; }
+  .video-card a { text-decoration: none; color: inherit; display: block; }
+  .video-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+  .video-card h3 { color: #fff; font-size: 1rem; padding: 1rem; margin: 0; line-height: 1.4; }
+  
+  @media (min-width: 768px) {
+    .video-card { min-width: 360px; }
+  }
+  
+  .loading { color: #aaa; text-align: center; width: 100%; padding: 2rem; }
+</style>
