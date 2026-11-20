@@ -1,4 +1,4 @@
-﻿backend:
+backend:
   name: git-gateway
   branch: main
 
@@ -30,3 +30,24 @@ collections:
       - { label: "Alt-текст", name: "image_alt", widget: "string" }
       - { label: "Период", name: "period", widget: "string" }
       - { label: "Результат", name: "result", widget: "string" }
+
+  - name: "gallery"
+    label: "Галерея"
+    folder: "src/content/gallery"
+    create: true
+    fields:
+      - { label: "Фото", name: "image", widget: "image" }
+      - { label: "Alt-текст", name: "alt", widget: "string" }
+      - { label: "Подпись", name: "caption", widget: "string", required: false }
+
+  - name: "blog"
+    label: "Статьи"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Дата", name: "date", widget: "datetime" }
+      - { label: "SEO Description", name: "description", widget: "text" }
+      - { label: "Обложка", name: "cover", widget: "image", required: false }
+      - { label: "Текст", name: "body", widget: "markdown" }
