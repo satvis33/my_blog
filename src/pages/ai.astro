@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="AI-Ассистент Андрея Савицкого" description="Задайте вопрос личному AI-ассистенту">
+  <main class="ai-page">
+    <h1>AI-Ассистент</h1>
+    <p>Задайте вопрос об Андрее Савицком и его проектах.</p>
+    <div id="chat"></div>
+    <form id="chat-form">
+      <input id="chat-input" type="text" placeholder="Ваш вопрос..." autocomplete="off" />
+      <button type="submit">Отправить</button>
+    </form>
+  </main>
+</Layout>
+
+<script>
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const chat = document.getElementById('chat');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    chat.innerHTML += <p class="user">Вы: \</p>;
+    input.value = '';
+    chat.scrollTop = chat.scrollHeight;
+
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg }),
+    });
+    const data = await res.json();
+    chat.innerHTML += <p class="ai">AI: \</p>;
+    chat.scrollTop = chat.scrollHeight;
+  });
+</script>
+
+<style>
+  .ai-page { max-width: 720px; margin: 0 auto; padding: 4rem 2rem; }
+  h1 { color: #f9fafb; margin-bottom: 1rem; text-align: center; }
+  p { text-align: center; color: #aaa; margin-bottom: 2rem; }
+  #chat { background: #111; border-radius: 8px; padding: 1rem; min-height: 300px; max-height: 500px; overflow-y: auto; margin: 1rem 0; border: 1px solid #333; }
+  .user { color: #8ab4f8; margin: 0.5rem 0; }
+  .ai { color: #e8eaed; margin: 0.5rem 0; }
+  #chat-form { display: flex; gap: 1rem; }
+  input { flex: 1; padding: 0.8rem; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 4px; font-size: 1rem; }
+  button { padding: 0.8rem 1.5rem; background: #d2e0ff; color: #000; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+</style>
