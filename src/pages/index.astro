@@ -35,3 +35,14 @@ const youtubeUrl = "https://www.youtube.com/embed/Azc63zJjTUk";
   .video-frame { max-width: 800px; margin: 0 auto; aspect-ratio: 16/9; }
   .video-frame iframe { width: 100%; height: 100%; border-radius: 12px; }
 </style>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
