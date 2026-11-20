@@ -1,0 +1,16 @@
+{
+  "name": "savitsky-site",
+  "version": "1.0.0",
+  "description": "Andrey Savitsky portfolio",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/netlify": "^8.2.14",
+    "@astrojs/sitemap": "^3.7.6",
+    "astro": "^7.4.13"
+  }
+}
